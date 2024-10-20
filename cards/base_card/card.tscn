@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://8btpclk6kbda"]
+
+[ext_resource type="Script" path="res://cards/base_card/card.gd" id="1_euubm"]
+[ext_resource type="Resource" uid="uid://b8orqe2ga18fk" path="res://cards/card_data/move4.tres" id="2_c5uqj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fe2g0"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_x5l15"]
+font_size = 32
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ij8dr"]
+size = Vector2(300, 150)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3vgdw"]
+font_size = 24
+
+[node name="Card" type="Control"]
+custom_minimum_size = Vector2(300, 300)
+layout_direction = 2
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_euubm")
+card_data = ExtResource("2_c5uqj")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 300.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 301.0
+
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Type" type="Label" parent="VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "Type"
+label_settings = SubResource("LabelSettings_fe2g0")
+
+[node name="Cost" type="Label" parent="VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_x5l15")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_ij8dr")
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Card Name"
+label_settings = SubResource("LabelSettings_3vgdw")
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+text = "Test"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

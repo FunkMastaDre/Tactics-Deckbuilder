@@ -1,0 +1,88 @@
+[gd_scene load_steps=14 format=3 uid="uid://ds2kh8n2gww7f"]
+
+[ext_resource type="PackedScene" uid="uid://bco0mggmunip4" path="res://ui/ui.tscn" id="1_rl80d"]
+[ext_resource type="Script" path="res://levels/camera.gd" id="1_tn3vv"]
+[ext_resource type="Script" path="res://levels/grid/grid.gd" id="2_ctd5u"]
+[ext_resource type="PackedScene" uid="uid://dgug1363vdxek" path="res://units/unit.tscn" id="2_ebkra"]
+[ext_resource type="MeshLibrary" uid="uid://xhuxqfuf54ng" path="res://levels/testlib.tres" id="3_uomcc"]
+[ext_resource type="Script" path="res://levels/grid/navigation.gd" id="4_4g5yr"]
+[ext_resource type="Script" path="res://units/unit_controller.gd" id="6_2ox85"]
+[ext_resource type="PackedScene" uid="uid://cpy5v7ifh80ws" path="res://levels/grid/cursor.tscn" id="7_q353o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kv7gs"]
+albedo_color = Color(0.265672, 0.740697, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2547f"]
+material = SubResource("StandardMaterial3D_kv7gs")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_devvu"]
+
+[sub_resource type="Environment" id="Environment_sxe4n"]
+background_mode = 1
+background_color = Color(0.0253638, 0.0253638, 0.0253638, 1)
+background_energy_multiplier = 16.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_egycu"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Camera" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.35, 5.15806, 1.91495)
+script = ExtResource("1_tn3vv")
+
+[node name="Camera3D" type="Camera3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
+mesh = SubResource("SphereMesh_2547f")
+
+[node name="Grid" type="Node3D" parent="." node_paths=PackedStringArray("navigation", "tiles", "grid_map", "cursor")]
+script = ExtResource("2_ctd5u")
+navigation = NodePath("Navigation")
+tiles = NodePath("Tiles")
+grid_map = NodePath("GridMap")
+cursor = NodePath("Cursor")
+
+[node name="Cursor" parent="Grid" instance=ExtResource("7_q353o")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.74793, -3.73392, 1.52626)
+
+[node name="Navigation" type="Node3D" parent="Grid"]
+script = ExtResource("4_4g5yr")
+
+[node name="Tiles" type="Node3D" parent="Grid"]
+
+[node name="GridMap" type="GridMap" parent="Grid"]
+mesh_library = ExtResource("3_uomcc")
+physics_material = SubResource("PhysicsMaterial_devvu")
+cell_size = Vector3(1, 1, 1)
+cell_center_y = false
+collision_layer = 2
+data = {
+"cells": PackedInt32Array(65533, 65532, 0, 65534, 65533, 0, 65535, 65534, 0, 0, 65535, 0, 1, 0, 0, 2, 1, 0, 3, 2, 0, 4, 3, 0, 65534, 65532, 1, 65535, 65533, 1, 0, 65534, 1, 1, 65535, 1, 2, 0, 1, 3, 1, 1, 4, 2, 1, 5, 3, 1, 3, 3, 1, 2, 2, 1, 1, 1, 1, 0, 0, 1, 65535, 65535, 1, 65534, 65534, 1, 65533, 65533, 1, 65532, 65532, 1, 65535, 65532, 0, 0, 65533, 0, 1, 65534, 0, 2, 65535, 0, 3, 0, 0, 4, 1, 0, 5, 2, 0, 3, 4, 0, 2, 3, 0, 1, 2, 0, 0, 1, 0, 65535, 0, 0, 65534, 65535, 0, 65533, 65534, 0, 65532, 65533, 0, 65531, 65532, 0, 4, 5, 0, 5, 6, 0, 6, 3, 0, 7, 4, 0, 4, 4, 1, 5, 5, 1, 6, 6, 1, 6, 4, 1, 7, 5, 1, 8, 6, 1, 7, 6, 0, 6, 5, 0, 5, 4, 0, 0, 65532, 1, 2, 65532, 1, 4, 65532, 1, 6, 65532, 1, 8, 65532, 1, 1, 65532, 0, 3, 65532, 0, 5, 65532, 0, 7, 65532, 0, 2, 65533, 0, 4, 65533, 0, 6, 65533, 0, 8, 65533, 0, 3, 65534, 0, 5, 65534, 0, 7, 65534, 0, 4, 65535, 0, 6, 65535, 0, 8, 65535, 0, 5, 0, 0, 7, 0, 0, 6, 1, 0, 8, 1, 0, 7, 1, 1, 5, 1, 1, 6, 0, 1, 4, 0, 1, 3, 65535, 1, 2, 65534, 1, 1, 65533, 1, 3, 65533, 1, 5, 65533, 1, 4, 65534, 1, 5, 65535, 1, 6, 65534, 1, 7, 65533, 1, 7, 65535, 1, 8, 0, 1, 8, 65534, 1, 6, 2, 1, 8, 2, 1, 7, 3, 1, 8, 4, 1, 8, 5, 0, 8, 3, 0, 7, 2, 0, 4, 6, 1, 3, 5, 1, 2, 4, 1, 1, 3, 1, 0, 2, 1, 65535, 1, 1, 65534, 0, 1, 65533, 65535, 1, 65531, 65533, 1, 3, 6, 0, 2, 5, 0, 1, 4, 0, 0, 3, 0, 65535, 2, 0, 65534, 1, 0, 65533, 0, 0, 65532, 65535, 0, 2, 6, 1, 1, 5, 1, 0, 4, 1, 65535, 3, 1, 65534, 2, 1, 65533, 1, 1, 65532, 0, 1, 65530, 65532, 1, 65530, 65534, 1, 65530, 65533, 0, 65529, 65532, 0, 65529, 65534, 0, 65530, 65535, 0, 65532, 1, 0, 65533, 2, 0, 65532, 2, 1, 65530, 0, 1, 65529, 65535, 1, 65529, 65533, 1, 65530, 1, 0, 65529, 0, 0, 65529, 1, 1, 65530, 2, 1, 65531, 3, 1, 65532, 3, 0, 65534, 3, 0, 65533, 3, 1, 65528, 65532, 1, 65528, 65534, 1, 65528, 0, 1, 65528, 2, 1, 65528, 4, 1, 65529, 2, 0, 65528, 1, 0, 65528, 3, 0, 65528, 65535, 0, 65528, 65533, 0, 65530, 3, 0, 65529, 4, 0, 65531, 4, 0, 65533, 4, 0, 65535, 4, 0, 65534, 4, 1, 65532, 4, 1, 65530, 4, 1, 65529, 3, 1, 65532, 65534, 1, 65531, 65534, 0, 65531, 65535, 1, 65531, 0, 0, 65531, 1, 1, 65531, 2, 0, 65535, 5, 1, 65533, 5, 1, 65531, 5, 1, 65529, 5, 1, 65528, 5, 0, 65530, 5, 0, 65532, 5, 0, 65534, 5, 0, 0, 5, 0, 1, 6, 0, 65535, 6, 0, 65533, 6, 0, 65531, 6, 0, 65529, 6, 0, 0, 6, 1, 65534, 6, 1, 65532, 6, 1, 65530, 6, 1, 65528, 6, 1)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sxe4n")
+camera_attributes = SubResource("CameraAttributesPractical_egycu")
+
+[node name="Units" type="Node3D" parent="." node_paths=PackedStringArray("navigation", "current_unit", "tiles")]
+script = ExtResource("6_2ox85")
+navigation = NodePath("../Grid/Navigation")
+current_unit = NodePath("Allies/Unit")
+tiles = NodePath("../Grid/Tiles")
+
+[node name="Allies" type="Node3D" parent="Units"]
+
+[node name="Unit" parent="Units/Allies" instance=ExtResource("2_ebkra")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0.0999889, 1.80728, 0.408435)
+
+[node name="Enemies" type="Node3D" parent="Units"]
+
+[node name="UI" parent="." node_paths=PackedStringArray("unit_controller") instance=ExtResource("1_rl80d")]
+unit_controller = NodePath("../Units")

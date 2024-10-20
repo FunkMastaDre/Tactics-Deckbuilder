@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpy5v7ifh80ws"]
+
+[ext_resource type="Texture2D" uid="uid://c8frjbs2c8dbe" path="res://assets/resize_d_cross_diagonal.png" id="1_cyvki"]
+[ext_resource type="Script" path="res://levels/grid/cursor.gd" id="2_apjl3"]
+
+[node name="Cursor" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+pixel_size = 0.05
+texture_filter = 0
+texture = ExtResource("1_cyvki")
+script = ExtResource("2_apjl3")

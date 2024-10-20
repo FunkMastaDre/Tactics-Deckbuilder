@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bco0mggmunip4"]
+
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_fmych"]
+[ext_resource type="Script" path="res://ui/hand.gd" id="1_paix0"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_fmych")
+
+[node name="Hand" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(1920, 300)
+layout_direction = 2
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -300.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_paix0")

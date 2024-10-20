@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgug1363vdxek"]
+
+[ext_resource type="Script" path="res://units/unit.gd" id="1_umg0p"]
+[ext_resource type="Script" path="res://units/card_component.gd" id="2_qxasl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v6p78"]
+
+[node name="Unit" type="CharacterBody3D"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+collision_mask = 2
+script = ExtResource("1_umg0p")
+
+[node name="Cards" type="Node" parent="."]
+script = ExtResource("2_qxasl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_v6p78")
+
+[node name="Tile Detection" type="RayCast3D" parent="."]
+target_position = Vector3(0, -2, 0)
+collision_mask = 4
+hit_from_inside = true

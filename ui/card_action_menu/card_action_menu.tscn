@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfuphengb6m06"]
+
+[ext_resource type="Script" path="res://ui/card_action_menu/card_action_menu.gd" id="1_1cw3v"]
+
+[node name="CardActionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+script = ExtResource("1_1cw3v")
+
+[node name="ActionContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_top = -66.0
+offset_right = 300.0
+mouse_filter = 2
+alignment = 2

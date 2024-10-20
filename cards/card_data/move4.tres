@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://b8orqe2ga18fk"]
+
+[ext_resource type="Script" path="res://cards/base_card/card_data.gd" id="1_brsrj"]
+[ext_resource type="Texture2D" uid="uid://bbcupx0af45gx" path="res://cards/art/Move4.png" id="1_i0sd1"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_brsrj")
+icon = ExtResource("1_i0sd1")
+name = "Move4"
+description = "Move {movement} spaces."
+type = 2
+max_amount = 4
+cost = 4
+movement = 4
+base_damage = 0
+can_use = false
+can_move = true
+exhaust = false
