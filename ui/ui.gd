@@ -10,6 +10,7 @@ var cards: CardComponent
 
 func _ready() -> void:
 	cards = unit_controller.current_unit.cards
+	Events.card_action_button_pressed.connect(_card_selected)
 
 
 #DEBUG
@@ -55,3 +56,8 @@ func display_ui_element(element: Node, display: bool = true):
 		element.hide()
 	else:
 		element.hide()
+
+
+func _card_selected(action: String, data: CardData):
+	if action == "Move":
+		display_ui_element(hand_ui, false)

@@ -2,7 +2,7 @@ class_name Grid
 extends Node3D
 ## Base script for all grid related tasks.
 
-const TILE_SIZE = 1.0
+const TILE_SIZE = 1.0 ## Size of each tile on grid in meters.
 
 @export var navigation: Node3D
 @export var tiles: Node3D
@@ -21,8 +21,5 @@ func _ready() -> void:
 
 
 func spawn_tiles():
-	var tile_scene = load("res://levels/tiles/tile.tscn")
 	for point in navigation.points:
-		var instance = tile_scene.instantiate()
-		tiles.add_child(instance)
-		instance.position = point + Vector3(0, -0.499, 0)
+		tiles.create_tile(point)

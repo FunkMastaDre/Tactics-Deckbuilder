@@ -6,4 +6,4 @@ extends Node
 signal ui_element_mouse_entered
 
 ## emitted when a card action button is pressed.
-signal card_action_button_pressed(action : String)
+signal card_action_button_pressed(action: String, data: CardData)

@@ -9,6 +9,7 @@ extends Node3D
 var turn_order = []
 
 func _ready() -> void:
+	Events.card_action_button_pressed.connect(_card_selected)
 	connect_tile_signals()
 	snap_all_units()
 
@@ -31,3 +32,11 @@ func move_unit_to_tile(new_tile: Vector3):
 	var path = navigation.find_path(current_tile, new_tile)
 	current_unit.follow_path(path)
 	pass
+
+
+func _card_selected(action: String, data: CardData):
+	if action == "Move":
+		var current_tile = current_unit.get_current_tile()
+		var tile_pos = current_tile.global_position
+		var movement_cost = data.movement
+		tiles.highlight_movable_tiles(tile_pos, movement_cost)

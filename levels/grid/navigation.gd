@@ -43,19 +43,14 @@ func add_point(point: Vector3) -> void:
 ## Connect a single point to a point in each direction if possible
 func connect_point(id: int) -> void:
 	var point_pos: Vector3 = astar.get_point_position(id)
-	var search_coords: Array = [-grid.TILE_SIZE, 0, grid.TILE_SIZE]
-	for x in search_coords:
-		for z in search_coords:
-			var search_offset = Vector3(x, 0, z)
-			if search_offset == Vector3.ZERO:
-				continue
-			
-			var potential_neighbor = point_pos + search_offset
-			if points.has(potential_neighbor):
-				var current_id = points[point_pos]
-				var neighbor_id = points[potential_neighbor]
-				if not astar.are_points_connected(current_id, neighbor_id):
-					astar.connect_points(current_id, neighbor_id)
+	var directions: Array = [Vector3.FORWARD, Vector3.LEFT, Vector3.BACK, Vector3.RIGHT]
+	for direction in directions:
+		var potential_neighbor = point_pos + (direction * grid.TILE_SIZE)
+		if points.has(potential_neighbor):
+			var current_id = points[point_pos]
+			var neighbor_id = points[potential_neighbor]
+			if not astar.are_points_connected(current_id, neighbor_id):
+				astar.connect_points(current_id, neighbor_id)
 
 
 # Connect all points in the astar grid

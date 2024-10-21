@@ -31,4 +31,5 @@ func add_button(action_name : String):
 	var button = button_scene.instantiate()
 	button.text = action_name
 	button.name = action_name
+	button.data = data
 	action_container.add_child(button)
