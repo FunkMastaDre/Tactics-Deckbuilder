@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ds2kh8n2gww7f"]
+[gd_scene load_steps=15 format=3 uid="uid://ds2kh8n2gww7f"]
 
 [ext_resource type="PackedScene" uid="uid://bco0mggmunip4" path="res://ui/ui.tscn" id="1_rl80d"]
 [ext_resource type="Script" path="res://levels/camera.gd" id="1_tn3vv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgug1363vdxek" path="res://units/unit.tscn" id="2_ebkra"]
 [ext_resource type="MeshLibrary" uid="uid://xhuxqfuf54ng" path="res://levels/testlib.tres" id="3_uomcc"]
 [ext_resource type="Script" path="res://levels/grid/navigation.gd" id="4_4g5yr"]
+[ext_resource type="Script" path="res://levels/tiles/tiles_controller.gd" id="5_ao3k0"]
 [ext_resource type="Script" path="res://units/unit_controller.gd" id="6_2ox85"]
 [ext_resource type="PackedScene" uid="uid://cpy5v7ifh80ws" path="res://levels/grid/cursor.tscn" id="7_q353o"]
 
@@ -50,7 +51,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -6.747
 [node name="Navigation" type="Node3D" parent="Grid"]
 script = ExtResource("4_4g5yr")
 
-[node name="Tiles" type="Node3D" parent="Grid"]
+[node name="Tiles" type="Node3D" parent="Grid" node_paths=PackedStringArray("navigation")]
+script = ExtResource("5_ao3k0")
+navigation = NodePath("../Navigation")
 
 [node name="GridMap" type="GridMap" parent="Grid"]
 mesh_library = ExtResource("3_uomcc")

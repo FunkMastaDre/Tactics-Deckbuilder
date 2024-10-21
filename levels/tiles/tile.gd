@@ -11,6 +11,7 @@ signal tile_clicked(tile_pos: Vector3)
 
 
 var is_highlighted : bool
+var is_movable : bool
 
 
 func _ready() -> void:
@@ -20,8 +21,8 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	## Emit signal if tile is clicked while highlighted.
-	if Input.is_action_just_pressed("leftclick") and is_highlighted == true:
-		if self.position == cursor.position and cursor.is_visible_in_tree():
+	if Input.is_action_just_pressed("Select") and is_highlighted == true:
+		if detect_cursor():
 			tile_clicked.emit(self.global_position)
 			print("tile clicked")
 		else:
@@ -39,3 +40,23 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	is_highlighted = false
+
+
+## Checks if cursor is selecting tiles
+func detect_cursor() -> bool:
+	if self.position == cursor.position and cursor.is_visible_in_tree():
+		return true
+	else:
+		return false
+
+
+func highlight_tile() -> void:
+	var mat : Material = mesh.get_active_material(0)
+	mesh.transparency = 0.8
+	mat.albedo_color = Color.BLUE
+
+
+func reset_tile() -> void:
+	is_movable = false
+	is_highlighted = false
+	mesh.transparency = 1
