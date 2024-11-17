@@ -3,11 +3,13 @@ extends CharacterBody3D
 ## Base class for Units.
 
 
+
 var alignment : String
 var unit_group: Node3D
 
 @onready var cards : CardComponent = $Cards
 @onready var tile_detection: RayCast3D = $"Tile Detection"
+@onready var controller: Unit_Controller = get_parent().get_parent()
 
 
 # DEBUG
@@ -33,6 +35,7 @@ func follow_path(path: Array) -> void:
 		self.global_position = tile
 		if tile != path[-1]:
 			await get_tree().create_timer(0.2).timeout
+	controller.unit_moved.emit("move_complete")
 
 
 ## Centers unit on its closest tile.

@@ -63,7 +63,8 @@ func _connect_all_points() -> void:
 func find_path(from: Vector3, to: Vector3) -> Array:
 	var start = astar.get_closest_point(from)
 	var end = astar.get_closest_point(to)
-	return astar.get_point_path(start, end)
+	var path = astar.get_point_path(start, end)
+	return path
 
 
 # Turns off an astar point. Useful if a unit is standing there.

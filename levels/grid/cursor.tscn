@@ -9,3 +9,9 @@ pixel_size = 0.05
 texture_filter = 0
 texture = ExtResource("1_cyvki")
 script = ExtResource("2_apjl3")
+
+[node name="Tile Detection" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1.30131e-08, -0.297704)
+target_position = Vector3(0, -2, 0)
+collision_mask = 4
+hit_from_inside = true

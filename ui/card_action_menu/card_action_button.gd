@@ -12,3 +12,7 @@ func _on_pressed() -> void:
 	var message = format_string % button_name
 	print(message)
 	Events.card_action_button_pressed.emit(button_name, data)
+
+
+func _on_mouse_entered() -> void:
+	Events.ui_element_mouse_entered.emit()

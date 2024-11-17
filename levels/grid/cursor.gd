@@ -4,6 +4,9 @@ extends Sprite3D
 
 const y_offset = Vector3(0, -0.49, 0)
 
+@onready var tile_detection: RayCast3D = $"Tile Detection"
+
+
 
 func _ready() -> void:
 	Events.ui_element_mouse_entered.connect(_hide_cursor, CONNECT_DEFERRED)
@@ -18,8 +21,21 @@ func _on_tile_highlighted(tile_pos: Vector3):
 
 
 func _hide_cursor():
-	Utility.show_node(self, false)
+	self.hide()
 
 
 func _show_cursor():
-	Utility.show_node(self)
+	self.show()
+
+
+func get_current_tile() -> Tile:
+	tile_detection.force_raycast_update()
+	var collider = tile_detection.get_collider()
+	return collider
+
+
+func movable_tile_check() -> bool:
+	if get_current_tile().is_highlighted and get_current_tile().is_movable:
+		return true
+	else:
+		return false
