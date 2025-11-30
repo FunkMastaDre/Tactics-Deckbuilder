@@ -1,2 +1,4 @@
-# Project Ac!d
+# Tactics Deckbuilder
+
+Old Code from an in progress Deckbuilder before restarting.
  
